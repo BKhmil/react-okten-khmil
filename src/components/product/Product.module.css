@@ -1,0 +1,23 @@
+.productImg {
+    width: 50%;
+}
+
+.product {
+    width: 100%;
+    border: 3px solid red;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.imagesWrapper {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.field {
+    margin: 3px;
+    box-sizing: border-box;
+    width: fit-content;
+    background-color: lightblue;
+}

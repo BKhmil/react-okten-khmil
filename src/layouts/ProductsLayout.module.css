@@ -1,0 +1,7 @@
+.container {
+    margin: auto;
+    width: 40vw;
+    background-color: lightcoral;
+    padding: 10px;
+    border: 5px solid purple;
+}
