@@ -1,0 +1,13 @@
+.wrapper {
+    border: 3px solid red;
+    padding: 5px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+
+    .field {
+        border: 1px solid green;
+        padding: 5px;
+        margin: 5px;
+    }
+}

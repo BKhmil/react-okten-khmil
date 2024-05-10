@@ -1,0 +1,9 @@
+.postsWrapper {
+    border: 4px solid black;
+    padding: 5px;
+}
+
+.postsTitle {
+    text-align: center;
+    font-size: 32px;
+}

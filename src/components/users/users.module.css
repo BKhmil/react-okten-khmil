@@ -1,0 +1,9 @@
+.usersWrapper {
+    border: 4px solid black;
+    padding: 5px;
+}
+
+.usersTitle {
+    text-align: center;
+    font-size: 32px;
+}

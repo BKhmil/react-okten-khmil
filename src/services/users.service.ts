@@ -9,7 +9,7 @@ let axiosInstance = axios.create({
 });
 
 function getAllUsers(): Promise<AxiosResponse<IUsersServerResponse>> {
-    return axiosInstance.get('/users');
+    return axiosInstance.get('/users?limit=5');
 }
 
 export {
