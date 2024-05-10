@@ -6,3 +6,4 @@ export type IPost = {
     tags: string[],
     reactions: number
 };
+// звичайна типізація

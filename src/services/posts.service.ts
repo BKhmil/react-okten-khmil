@@ -8,6 +8,8 @@ let axiosInstance = axios.create({
     }
 });
 
+// тут вже тягну пости з відповідного ендпоінта
+// про дженерік писав в іншому сервісі
 function getAllPosts(id: number): Promise<AxiosResponse<IPostsServerResponse>> {
     return axiosInstance.get(`/users/${id}/posts`);
 }

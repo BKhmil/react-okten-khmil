@@ -2,6 +2,7 @@ import {IUserAddress} from "./IUserAddress";
 import {IUserBank} from "./IUserBank";
 import {IUserCompany} from "./IUserCompany";
 
+// тип для юзера
 export type IUser = {
     id: number,
     firstName: string,

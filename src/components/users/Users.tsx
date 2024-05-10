@@ -4,17 +4,26 @@ import  {getAllUsers} from "../../services/users.service";
 import User from "../user/User";
 import styles from './users.module.css';
 
+// додаю в типізацію пропсів нашу функцію-ліфт
 type IProps = {lift?: (userId: number) => void};
 
 const Users: FC<IProps> = ({lift}) => {
+
+    // стейт для масиву юзерів
     const [usersData, setUsersData] = useState<IUser[]>([]);
 
+    // дістаю масив юзерів
     useEffect(() => {
+        //                                                      і сетаю його в стейт
         getAllUsers().then(({data}) => setUsersData(data.users));
     }, []);
 
     return <div className={styles.usersWrapper}>
+
+        {/* заголовок для лівої колонки з інфою про юзерів*/}
         <div className={styles.usersTitle}>USERS</div>
+
+        {/* мапом виводжу юзерів, спускаю функцію-ліфт все нижче по дереву */}
         {usersData.map((user, index) => <User
             key={index}
             id={user.id}
