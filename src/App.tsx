@@ -28,7 +28,7 @@ const App: FC = () => {
 
     const inc = () => {
         x.modify(prev => {
-            setState(++prev);
+            setState(prevState => ++prevState);
             return ++prev;
         });
     };
@@ -42,7 +42,7 @@ const App: FC = () => {
     <>
       {/*  TASK 2   */}
         <div>
-            <p>Current count: {state}</p>
+            <p>Current count: {x.current}</p>
             <p>Previous count: {x.previous ? x.previous : 'null'}</p>
             <button onClick={inc}>Increment</button>
         </div>
