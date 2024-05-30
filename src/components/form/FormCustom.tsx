@@ -4,6 +4,7 @@ import {IPost} from "../../models/IPost";
 import styles from './FormCustom.module.css';
 import {joiResolver} from "@hookform/resolvers/joi";
 import {postValidator} from "../../validators/post.validator";
+import {postReq} from "../../services/POST/post.service";
 
 const FormCustom = () => {
     // стейт для постів
@@ -23,28 +24,9 @@ const FormCustom = () => {
 
     // метод який викликається на сабміт форми
     const forSubmit = (data: IPost) => {
-        // роблю фетч запит на потрібну урлу
-        fetch('https://jsonplaceholder.typicode.com/posts', {
-            // метод пост
-            method: 'POST',
-            // витягую значення із полів у новий об'єкт
-            body: JSON.stringify({
-                userId: data.userId,
-                title: data.title,
-                body: data.body
-            }),
-            // у заголовку вказав що джейсон відправляю
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then((response) => response.json())
-            .then((json: IPost) => {
-                console.log(json);
-                // тут я вирішив після відправки оновлювати стейт
-                // тобто стейт у мене грає роль суто ререндерщика
-                // для того щоб потім відображати інфу про дані минулого поста
-                setPost(json);
+        postReq(data)
+            .then(value => {
+                setPost(value.data);
                 reset();
             });
     };
