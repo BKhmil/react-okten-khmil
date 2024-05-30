@@ -1,0 +1,29 @@
+.block {
+    display: block;
+}
+
+.wrapper {
+    margin: 100px auto;
+    width: fit-content;
+    padding: 5px;
+    border: 4px solid red
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    font-size: 22px;
+}
+
+textarea {
+    width: 300px;
+    height: 100px;
+    resize: none;
+}
+
+button {
+    font-size: 28px;
+    width: 100%;
+}
