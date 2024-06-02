@@ -31,7 +31,7 @@ const Posts = () => {
             */}
             <h1 className={styles.title}>{userId ? 'Current user posts' : 'Information about all posts'}</h1>
             <div className={styles.container}>
-                {posts.map(post => <Post key={post.id} post={post}/>)}
+                {posts.map(post => <Post key={post.id} post={post} isChild={!!userId}/>)}
             </div>
         </div>
     );

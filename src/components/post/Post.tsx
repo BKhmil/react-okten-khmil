@@ -5,8 +5,9 @@ import NavButton from "../nav-button/NavButton";
 
 interface IProps {
     post: IPost;
+    isChild: boolean;
 }
-const Post: FC<IProps> = ({post}) => {
+const Post: FC<IProps> = ({post, isChild}) => {
     return (
         <div className={styles.wrapper}>
             <div>
@@ -15,7 +16,8 @@ const Post: FC<IProps> = ({post}) => {
                 <div className={styles.field}>title: {post.title}</div>
                 <div className={styles.field}>body: {post.body}</div>
             </div>
-            <NavButton text={'show comments to post'} id={post.id + ''}/>
+            {/*  відстежую спосіб яким було викликану компоненту, чи скоріше обставини */}
+            {!isChild && <NavButton text={'show comments to post'} id={post.id + ''}/>}
         </div>
     );
 };
