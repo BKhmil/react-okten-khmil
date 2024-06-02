@@ -21,5 +21,4 @@ const Post: FC<IProps> = ({post, isChild}) => {
         </div>
     );
 };
-
 export default Post;
