@@ -5,6 +5,9 @@
     background-color: lightgrey;
     font-size: 16px;
     padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .field {
@@ -12,4 +15,20 @@
     padding: 5px;
     background-color: lightskyblue;
     border: 2px solid lightslategrey;
+}
+
+button {
+    width: 100%;
+    color: grey;
+    border: solid grey;
+    padding: 10px 0;
+    background-color: transparent;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+button:hover {
+    border: dashed;
+    cursor: pointer;
 }

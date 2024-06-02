@@ -13,3 +13,18 @@
     background-color: lightskyblue;
     border: 2px solid lightslategrey;
 }
+
+button {
+    width: 100%;
+    color: grey;
+    border: solid grey;
+    padding: 10px 0;
+    background-color: transparent;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+button:hover {
+    border: dashed;
+    cursor: pointer;
+}

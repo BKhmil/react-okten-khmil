@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {IUser} from "../../models/user/IUser";
 import styles from './User.module.css';
+import NavButton from "../nav-button/NavButton";
 
 interface IProps {
     user: IUser;
@@ -31,6 +32,7 @@ const User: FC<IProps> = ({user}) => {
                 <li>catchPhrase: {user.company.catchPhrase}</li>
                 <li>bs: {user.company.bs}</li>
             </ul>
+            <NavButton text={'show user\'s posts'} id={user.id + ''} />
         </div>
     );
 };

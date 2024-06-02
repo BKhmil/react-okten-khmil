@@ -1,25 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import {IPost} from "../../models/post/IPost";
-import apiService from "../../services/api.service";
-import Post from "../../components/post/Post";
+import React from 'react';
+import Posts from "../../components/posts/Posts";
+import {Outlet} from "react-router-dom";
 import styles from './PostsPage.module.css';
 
 // описав все у CommentsPage
 const PostsPage = () => {
-    const [posts, setPosts] = useState<IPost[]>([]);
-
-    useEffect(() => {
-        apiService.getPosts().then(response => setPosts(response.data));
-    }, []);
-
+    // тепер у мене пейджі PostsPage i UsersPage без логіки
+    // що для мене чомусь стало тепер(тавтологія) логічним
+    // тобто це просто сторінка яка просто відображає інфу про пости
+    // тобто пости це її головна тема, але вона може і щось інше в теорії відображати
+    // а підвантажує і виконує логіку над самими постами нехай уже сам спеціалізований для цього компонент Posts
     return (
-        <>
-            <h1 className={styles.title}>Information about all posts</h1>
-            <div className={styles.container}>
-                {posts.map(post => <Post key={post.id} post={post}/>)}
-            </div>
-        </>
-    );
+        <div className={styles.flex}>
+            <Posts />
+            <Outlet />
+        </div>
+    )
 };
 
 export default PostsPage;
