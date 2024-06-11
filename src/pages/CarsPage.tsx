@@ -33,29 +33,13 @@ const CarsPage = () => {
         // в депсах слідкую за змінами в параметрах урли
     }, [query]);
 
-    // функція яка відповідає за пагінацію
-    // аргументом приймає action в залежності від якого спрацьовує відповідний кейс у світчі
-    const changePage = (action: string) => {
-        switch(action) {
-            case 'prev':
-                // якщо попередня сторінка потрібна, то оновлюю query
-                // передаю туди новий об'єкт з оновленим полем prev
-                setQuery({...carsPaginatedObject.prev});
-                break;
-            case 'next':
-                // тут аналогічно
-                setQuery({...carsPaginatedObject.next});
-                break;
-        }
-    }
-
     return (
         <div>
             {/*
                     передаю компоненті яка відповідає за пагінацію функцію, яка виконує пагінацію
                     та значення полів next і prev, для контролю властивості disabled у кнопках
             */}
-            <PaginationComponent changePage={changePage} next={carsPaginatedObject.next} prev={carsPaginatedObject.prev} />
+            <PaginationComponent next={carsPaginatedObject.next} prev={carsPaginatedObject.prev} />
 
             {/*
                     передаю компоненті яка відповідає за мишини масив самих машин. який лежить у полі items
