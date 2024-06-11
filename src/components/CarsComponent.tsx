@@ -1,17 +1,17 @@
 import React, {FC} from 'react';
-import {ICarPaginatedModel} from "../models/ICarPaginatedModel";
 import CarComponent from "./CarComponent";
+import {ICarWithAuth} from "../models/ICarWithAuth";
 
 interface IProps {
-    carsPaginatedModel: ICarPaginatedModel | null;
+    cars: ICarWithAuth[];
 }
-const CarsComponent: FC<IProps> = ({carsPaginatedModel}) => {
+const CarsComponent: FC<IProps> = ({cars}) => {
     return (
-        <div>
-            {carsPaginatedModel
-                &&
-                carsPaginatedModel.items.map((value, index) =>
-                    <CarComponent key={index} car={value}/>)}
+        <div style={{display: 'flex'}}>
+            {
+                cars.map((value, index) =>
+                    <CarComponent key={index} car={value}/>)
+            }
         </div>
     );
 };

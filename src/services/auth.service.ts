@@ -1,5 +1,5 @@
 import axios, {AxiosError} from "axios";
-import {AuthDataModel} from "../models/AuthDataModel";
+import {IAuthDataModel} from "../models/IAuthDataModel";
 import {ITokenObtainPair} from "../models/ITokenObtainPair";
 import {retriveLocalStorageData} from "../utils/utils";
 import {ICarPaginatedModel} from "../models/ICarPaginatedModel";
@@ -19,7 +19,7 @@ axiosInstance.interceptors.request.use(request => {
 });
 
 const authService= {
-    authentication: async (authData: AuthDataModel): Promise<boolean> => {
+    authentication: async (authData: IAuthDataModel): Promise<boolean> => {
         let response;
 
         try {
@@ -41,9 +41,11 @@ const authService= {
 };
 
 const carService = {
-    getCars: async () => {
+    getCars: async (page: string) => {
         try {
-            const response = await axiosInstance.get<ICarPaginatedModel>('/cars');
+            const response = await axiosInstance.get<ICarPaginatedModel>('/cars', {
+                params: {page}
+            });
 
             return response.data;
         } catch (e) {
@@ -54,7 +56,7 @@ const carService = {
 
                 await authService.refresh(refreshToken);
 
-                await carService.getCars();
+                await carService.getCars(page);
             }
         }
     }

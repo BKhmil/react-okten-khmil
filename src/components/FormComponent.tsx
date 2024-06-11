@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
-import {AuthDataModel} from "../models/AuthDataModel";
+import {IAuthDataModel} from "../models/IAuthDataModel";
 import {authService} from "../services/auth.service";
 
 const FormComponent = () => {
-    const {handleSubmit, register} = useForm<AuthDataModel>();
+    const {handleSubmit, register} = useForm<IAuthDataModel>({
+        defaultValues: {username: 'BKhmil1', password: 'P@$$word1'}
+    });
 
     const [isAuthState, setIsAuthState] = useState<boolean>(false);
-    const authenticate = async (formData: AuthDataModel) => {
+    const authenticate = async (formData: IAuthDataModel) => {
         const isAuth = await authService.authentication(formData);
         setIsAuthState(isAuth);
     };

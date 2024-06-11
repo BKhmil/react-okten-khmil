@@ -7,7 +7,7 @@ interface IProps {
 
 const CarComponent: FC<IProps> = ({car}) => {
     return (
-        <div style={{width: 'fit-content', border: 'solid red 2px'}}>
+        <div style={{width: 'fit-content', border: 'solid red 2px', margin: '5px'}}>
             <div>id: {car.id}</div>
             <div>brand: {car.brand}</div>
             <div>year: {car.year}</div>
