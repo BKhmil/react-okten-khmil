@@ -4,7 +4,8 @@ import {IPost} from "../models/IPost";
 
 type TStore = {
     userStore: {
-        allUsers: IUser[]
+        allUsers: IUser[],
+        setFavoriteUser: (obj: IUser) => void
     },
     postStore: {
         allPosts: IPost[]
@@ -13,7 +14,8 @@ type TStore = {
 
 const defaultValue: TStore = {
     userStore: {
-        allUsers: []
+        allUsers: [],
+        setFavoriteUser: () => {}
     },
     postStore: {
         allPosts: []
