@@ -3,11 +3,17 @@ import App from "../App";
 import UsersPage from "../pages/UsersPage";
 import PostsPage from "../pages/PostsPage";
 import UserPostsPage from "../pages/UserPostsPage";
+import CommentsPage from "../pages/CommentsPage";
+import PostCommentsPage from "../pages/PostCommentsPage";
 
 const routes: RouteObject[] = [
     {
         path: '',
+
+        // замість layout зараз апп компонент
         element: <App />,
+
+        // шляхи на різні пейджі
         children: [
             {
                 path: 'users',
@@ -20,6 +26,14 @@ const routes: RouteObject[] = [
             {
                 path: 'userPosts',
                 element: <UserPostsPage />
+            },
+            {
+                path: 'comments',
+                element: <CommentsPage />
+            },
+            {
+                path: 'postComments',
+                element: <PostCommentsPage />
             }
         ]
     }

@@ -2,6 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {useMyContext} from "../context/MyContext";
 import {TUserWithPosts} from "../types/TUserWithPosts";
 
+// опис якишй містить файл PostCommentsComponent.tsx буде аналогічним і для цього файлу
 const UserPostsComponent = () => {
     const {userStore:{allUsers}, postStore:{allPosts}} = useMyContext();
 
@@ -13,7 +14,8 @@ const UserPostsComponent = () => {
         (): TUserWithPosts[] =>
             allUsers.map(user =>
                 ({...user, posts: allPosts.filter(post =>
-                        post.userId === user.id)})), [allUsers, allPosts]);
+                        post.userId === user.id)})),
+        [allUsers, allPosts]);
 
     useEffect(() => {
         setUsersWithPosts(makeUserWithPostsArray);
@@ -21,6 +23,7 @@ const UserPostsComponent = () => {
 
     return (
         <div>
+            <h1>User posts</h1>
             {
                 usersWithPosts.map((user, index) =>
                     <div key={index}>

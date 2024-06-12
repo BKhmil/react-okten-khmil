@@ -1,13 +1,13 @@
 import React from 'react';
-import UsersComponent from "../components/UsersComponent";
+import CommentsComponent from "../components/CommentsComponent";
 
 // пейджа без логіки яка просто відображає контент
-const UsersPage = () => {
+const CommentsPage = () => {
     return (
         <div>
-            <UsersComponent />
+            <CommentsComponent />
         </div>
     );
 };
 
-export default UsersPage;
+export default CommentsPage;
