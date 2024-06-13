@@ -1,43 +1,32 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import './App.css';
-import {Outlet} from "react-router-dom";
+import {Outlet, useLocation} from "react-router-dom";
 import HeaderComponent from "./components/HeaderComponent";
 import {postService, userService} from "./services/api.service";
-import {MyContext} from "./context/MyContext";
-import {IUser} from "./models/IUser";
-import {IPost} from "./models/IPost";
+import {useStore} from "./context/MyContext";
 
 const App: FC = () => {
-    const [users, setUsers] = useState<IUser[]>([]);
-    const [posts, setPosts] = useState<IPost[]>([]);
-    const [favoriteUser, setFavoriteUser] = useState<IUser | null>(null);
+    const {
+        userStore,
+        userStore:{favoriteUser},
+        postStore
+    } = useStore();
+
+    const {pathname} = useLocation();
 
     useEffect(() => {
-        userService.getUsers().then(value => setUsers(value.data));
-        postService.getPosts().then(value => setPosts(value.data));
+        userService.getUsers().then(value => userStore.loadUsers(value.data));
+        postService.getPosts().then(value => postStore.loadPosts(value.data));
     }, []);
-
-    const lift = (obj: IUser) => setFavoriteUser(obj);
 
     return (
         <>
             <HeaderComponent/>
-            <MyContext.Provider value={
-                {
-                    userStore: {
-                        allUsers: users,
-                        setFavoriteUser: (obj: IUser) => lift(obj)
-                    },
-                    postStore: {
-                        allPosts: posts
-                    }
-                }
-            }>
-                <Outlet/>
-            </MyContext.Provider>
+
+            <Outlet/>
 
             <hr/>
-            {favoriteUser && <div>{'Favorite user: ' + favoriteUser.name}</div>}
+            {pathname === '/users' && favoriteUser && <div>{'Favorite user: ' + favoriteUser.name}</div>}
             <hr/>
         </>
     );

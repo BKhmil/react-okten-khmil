@@ -1,27 +1,71 @@
-import {createContext, useContext} from "react";
 import {IUser} from "../models/IUser";
 import {IPost} from "../models/IPost";
+import {create} from "zustand";
 
 type TStore = {
     userStore: {
         allUsers: IUser[],
-        setFavoriteUser: (obj: IUser) => void
+        loadUsers: (users: IUser[]) => void,
+        favoriteUser: IUser | null,
+        setFavoriteUser: (user: IUser) => void
     },
     postStore: {
-        allPosts: IPost[]
+        allPosts: IPost[],
+        loadPosts: (posts: IPost[]) => void
     }
 }
 
-const defaultValue: TStore = {
+export const defaultValue: TStore = {
     userStore: {
         allUsers: [],
-        setFavoriteUser: () => {}
+        loadUsers: (users: IUser[]) => {},
+        favoriteUser: null,
+        setFavoriteUser: (user: IUser) => {}
     },
     postStore: {
-        allPosts: []
+        allPosts: [],
+        loadPosts: (posts: IPost[]) => {}
     }
 };
 
-export const MyContext = createContext<TStore>(defaultValue);
-
-export const useMyContext = (): TStore => useContext(MyContext);
+export const useStore = create<TStore>()(set =>
+    ({
+        userStore: {
+            allUsers: [],
+            loadUsers: (users: IUser[]) =>
+                set(state =>
+                    ({
+                        ...state,
+                        userStore: {
+                            ...state.userStore,
+                            allUsers: users
+                        }
+                    })
+                ),
+            favoriteUser: null,
+            setFavoriteUser: (user: IUser) =>
+                set(state =>
+                    ({
+                        ...state,
+                        userStore: {
+                            ...state.userStore,
+                            favoriteUser: user
+                        }
+                    })
+                )
+        },
+        postStore: {
+            allPosts: [],
+            loadPosts: (posts: IPost[]) =>
+                set(state =>
+                    ({
+                        ...state,
+                        postStore: {
+                            ...state.postStore,
+                            allPosts: posts
+                        }
+                    })
+                )
+        }
+    })
+);

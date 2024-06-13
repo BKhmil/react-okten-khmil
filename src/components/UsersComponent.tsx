@@ -1,9 +1,9 @@
 import React from 'react';
-import {useMyContext} from "../context/MyContext";
+import {useStore} from "../context/MyContext";
 import UserComponent from "./UserComponent";
 
 const UsersComponent = () => {
-    const {userStore: {allUsers}} = useMyContext();
+    const {userStore: {allUsers}} = useStore();
 
     return (
         <div style={{display: 'flex', flexFlow: 'row wrap'}}>

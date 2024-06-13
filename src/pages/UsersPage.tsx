@@ -1,5 +1,4 @@
 import React from 'react';
-import {useMyContext} from "../context/MyContext";
 import UsersComponent from "../components/UsersComponent";
 
 const UsersPage = () => {

@@ -1,9 +1,9 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {useMyContext} from "../context/MyContext";
+import {useStore} from "../context/MyContext";
 import {TUserWithPosts} from "../types/TUserWithPosts";
 
 const UserPostsComponent = () => {
-    const {userStore:{allUsers}, postStore:{allPosts}} = useMyContext();
+    const {userStore:{allUsers}, postStore:{allPosts}} = useStore();
 
     const [usersWithPosts, setUsersWithPosts] =
         useState<TUserWithPosts[]>([]);
