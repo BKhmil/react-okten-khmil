@@ -1,9 +1,9 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {useStore} from "../context/MyContext";
+import {useStore} from "../context/useStore";
 import {TUserWithPosts} from "../types/TUserWithPosts";
 
 const UserPostsComponent = () => {
-    const {userStore:{allUsers}, postStore:{allPosts}} = useStore();
+    const {userStore: {allUsers}, postStore: {allPosts}} = useStore();
 
     const [usersWithPosts, setUsersWithPosts] =
         useState<TUserWithPosts[]>([]);
@@ -12,8 +12,10 @@ const UserPostsComponent = () => {
     const makeUserWithPostsArray = useMemo(() =>
         (): TUserWithPosts[] =>
             allUsers.map(user =>
-                ({...user, posts: allPosts.filter(post =>
-                        post.userId === user.id)})), [allUsers, allPosts]);
+                ({
+                    ...user, posts: allPosts.filter(post =>
+                        post.userId === user.id)
+                })), [allUsers, allPosts]);
 
     useEffect(() => {
         setUsersWithPosts(makeUserWithPostsArray);
@@ -21,6 +23,7 @@ const UserPostsComponent = () => {
 
     return (
         <div>
+            <h1>User posts</h1>
             {
                 usersWithPosts.map((user, index) =>
                     <div key={index}>

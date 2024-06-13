@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {IUser} from "../models/IUser";
-import {useStore} from "../context/MyContext";
+import {useStore} from "../context/useStore";
 
 interface IProps {
     user: IUser;
