@@ -1,12 +1,14 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {useStore} from "../context/useStore";
 import {TUserWithPosts} from "../types/TUserWithPosts";
 
 const UserPostsComponent = () => {
-    const {userStore: {allUsers}, postStore: {allPosts}} = useStore();
-
-    const [usersWithPosts, setUsersWithPosts] =
-        useState<TUserWithPosts[]>([]);
+    const {
+        userStore: {allUsers},
+        postStore: {allPosts},
+        userStore,
+        userStore:{allUsersWithPosts}
+    } = useStore();
 
     // OMG
     const makeUserWithPostsArray = useMemo(() =>
@@ -18,14 +20,14 @@ const UserPostsComponent = () => {
                 })), [allUsers, allPosts]);
 
     useEffect(() => {
-        setUsersWithPosts(makeUserWithPostsArray);
+        userStore.loadUsersWithPosts(makeUserWithPostsArray);
     }, [makeUserWithPostsArray]);
 
     return (
         <div>
             <h1>User posts</h1>
             {
-                usersWithPosts.map((user, index) =>
+                allUsersWithPosts.map((user, index) =>
                     <div key={index}>
                         {'Posts of ' + user.name + ':'}
                         <ul>

@@ -2,8 +2,8 @@ import {IUser} from "../models/IUser";
 import {IPost} from "../models/IPost";
 import {create} from "zustand";
 import {IComment} from "../models/IComment";
-// import {TUserWithPosts} from "../types/TUserWithPosts";
-// import {TPostWithComments} from "../types/TPostWithComments";
+import {TUserWithPosts} from "../types/TUserWithPosts";
+import {TPostWithComments} from "../types/TPostWithComments";
 
 // тип для мого сховища
 // все зроблено по типу useState, тобто поле для даних(стейту) та відповідний сеттер для цього поля
@@ -15,15 +15,16 @@ type TStore = {
         favoriteUser: IUser | null,
         setFavoriteUser: (user: IUser) => void
 
-        // allUsersWithPosts: TUserWithPosts[],
-        // loadUsersWithPosts: (usersWithPosts: TUserWithPosts[]) => void
+        allUsersWithPosts: TUserWithPosts[],
+        // ЕВРИКА, у мене ж там функція повертає функцію, тому тут треба пришймати функцію
+        loadUsersWithPosts: (callback: Function) => void
     },
     postStore: {
         allPosts: IPost[],
         loadPosts: (posts: IPost[]) => void
 
-        // allPostsWithComments: TPostWithComments[],
-        // loadPostsWithComments: (postsWithComments: TPostWithComments[]) => void
+        allPostsWithComments: TPostWithComments[],
+        loadPostsWithComments: (callback: Function) => void
     },
     commentStore: {
         allComments: IComment[],
@@ -71,18 +72,20 @@ export const useStore = create<TStore>()(set =>
                             favoriteUser: user
                         }
                     })
+                ),
+            allUsersWithPosts: [],
+            loadUsersWithPosts: (callback: Function) =>
+                set(state =>
+                    ({
+                        ...state,
+                        userStore: {
+                            ...state.userStore,
+                            // а тут потрібно не готовишй масив пришймати, а викликати колбек який передається
+                            // і вже він повертає масив
+                            allUsersWithPosts: callback()
+                        }
+                    })
                 )
-            // allUsersWithPosts: [],
-            // loadUsersWithPosts: (usersWithPosts: TUserWithPosts[]) =>
-            //     set(state =>
-            //         ({
-            //             ...state,
-            //             userStore: {
-            //                 ...state.userStore,
-            //                 allUsersWithPosts: usersWithPosts
-            //             }
-            //         })
-            //     )
         },
         postStore: {
             allPosts: [],
@@ -95,18 +98,18 @@ export const useStore = create<TStore>()(set =>
                             allPosts: posts
                         }
                     })
+                ),
+            allPostsWithComments: [],
+            loadPostsWithComments: (callback: Function) =>
+                set(state =>
+                    ({
+                        ...state,
+                        postStore: {
+                            ...state.postStore,
+                            allPostsWithComments: callback()
+                        }
+                    })
                 )
-            // allPostsWithComments: [],
-            // loadPostsWithComments: (postsWithComments: TPostWithComments[]) =>
-            //     set(state =>
-            //         ({
-            //             ...state,
-            //             postStore: {
-            //                 ...state.postStore,
-            //                 allPostsWithComments: postsWithComments
-            //             }
-            //         })
-            //     )
         },
         commentStore: {
             allComments: [],
